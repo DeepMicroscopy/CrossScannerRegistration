@@ -7,6 +7,8 @@ import numpy as np
 import imreg_dft as ird
 from scipy.stats import gaussian_kde
 import copy
+import argparse
+import openslide
 
 
 def create_mask(image):
@@ -292,7 +294,7 @@ def inital_registration(slide_source, slide_target, downsampling_factor):
     return E
 
 
-def wsi_registration(slide_source, slide_target, downsampling_factor):
+def wsi_registration(slide_source, slide_target, downsampling_factor=100):
     '''
     Registration process
     :param slide_source: reference slide for the registration
@@ -360,3 +362,21 @@ def wsi_registration(slide_source, slide_target, downsampling_factor):
 
     return initial_transformation, adaptive_transformation
 
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--source",
+        type=str,
+        help="storage location of source image"
+    )
+
+    parser.add_argument(
+        "--target",
+        type=str,
+        help="storage location of target image"
+    )
+    opt = parser.parse_args()
+    source_slide = openslide.open_slide(opt.source)
+    target_slide = openslide.open_slide(opt.target)
+    initial_transformation, adaptive_transformation = wsi_registration(source_slide, target_slide)
+    np.save('transformation.npy', adaptive_transformation)
