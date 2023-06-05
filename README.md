@@ -9,7 +9,7 @@ images, presented in:
 
      
 <p float="left">
-  <img src="registration.png" width="500" alt="Registration"/>
+  <img src="visualization.png" width="500" alt="Registration"/>
 </p>
      
 ## Features
