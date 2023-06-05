@@ -40,7 +40,7 @@ images, presented in:
    
 ## Usage
    ```console
-   python registration.py --source <path_to_source_image> --target <path_to_target_image>
+   python iterative_registration.py --source <path_to_source_image> --target <path_to_target_image>
    ```
    
 Replace **<path_to_source_image>** with the path to the source image, and **<path_to_target_image>** with the path to 
